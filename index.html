@@ -103,7 +103,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+            transition: opacity 0.8s cubic-bezier(0.8, 0, 0.2, 1), transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
         }
         
         .loader-blur {
@@ -116,14 +116,58 @@
             animation: pulse-slow 3s infinite alternate;
         }
 
-        .loader-text {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 0.2em;
-            color: var(--text-primary);
+        .loader-content {
             position: relative;
             z-index: 1;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .loader-perc {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .loader-perc::after {
+            content: '%';
+            font-size: 2rem;
+            font-weight: 400;
+            vertical-align: top;
+            margin-left: 0.2rem;
+            opacity: 0.5;
+        }
+
+        .loader-bar-container {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--text-primary);
+            transition: width 0.1s ease-out;
+        }
+
+        .loader-skill {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
         }
 
         /* Background Mesh / Grid */
@@ -813,7 +857,11 @@
     <!-- Load Overlay -->
     <div id="loader">
         <div class="loader-blur"></div>
-        <div class="loader-text">INITIALIZING</div>
+        <div class="loader-content">
+            <div class="loader-perc" id="loader-perc">0</div>
+            <div class="loader-bar-container"><div class="loader-bar" id="loader-bar"></div></div>
+            <div class="loader-skill" id="loader-skill">Initializing Elements...</div>
+        </div>
     </div>
 
     <!-- Custom Cursor -->
@@ -1124,16 +1172,50 @@
         // Copyright Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // 1. Initial Loader Fade Out
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.style.opacity = '0';
+        // 1. Custom Initial Loader Sequence
+        const loaderPerc = document.getElementById('loader-perc');
+        const loaderBar = document.getElementById('loader-bar');
+        const loaderSkill = document.getElementById('loader-skill');
+        const loader = document.getElementById('loader');
+
+        const loadingSkills = [
+            "Initializing Workspace...",
+            "Loading Shopify Architecture...",
+            "Integrating AI Webhooks...",
+            "Compiling UI/UX Interactions...",
+            "Optimizing Core Web Vitals...",
+            "Environment Ready."
+        ];
+
+        let perc = 0;
+        let skillIndex = 0;
+        
+        const loaderInterval = setInterval(() => {
+            perc += Math.floor(Math.random() * 4) + 1; // Increment by 1-4
+            if (perc > 100) perc = 100;
+            
+            if (loaderPerc) loaderPerc.textContent = perc;
+            if (loaderBar) loaderBar.style.width = perc + '%';
+            
+            const step = Math.floor((perc / 100) * (loadingSkills.length - 1));
+            if (step !== skillIndex && step < loadingSkills.length) {
+                skillIndex = step;
+                if (loaderSkill) loaderSkill.textContent = loadingSkills[skillIndex];
+            }
+
+            if (perc === 100) {
+                clearInterval(loaderInterval);
                 setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 800);
-            }, 500);
-        });
+                    if (loader) {
+                        loader.style.opacity = '0';
+                        loader.style.transform = 'translateY(-30px)'; // Elegant slide out
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                        }, 800);
+                    }
+                }, 500);
+            }
+        }, 30);
 
         // 2. Custom Cursor Logic (Only executes for pointer environments)
         if (window.matchMedia("(pointer: fine)").matches) {

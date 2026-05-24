@@ -1,20 +1,25 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Tanush Talwar - Developer Portfolio
 
-# Run and deploy your AI Studio app
+A premium, modern developer portfolio designed and built as a **single-file static website** (HTML, CSS, JavaScript). Optimized for high-performance and zero-config deployment.
 
-This contains everything you need to run your app locally.
+## Features
+- **Single File Architecture:** Everything is contained within `index.html` (no external CSS/JS files).
+- **No Build Tools Required:** No npm, Webpack, or Vite needed.
+- **Modern UI/UX:** Glassmorphism, smooth scroll, typing effects, and custom cursors.
+- **Performance Optimized:** Lightweight and blazing fast.
 
-View your app in AI Studio: https://ai.studio/apps/ab312bd4-0b95-4818-b468-987c20e84c48
+## Hosting on GitHub Pages
+This project is perfectly formatted to be hosted directly on GitHub Pages out-of-the-box.
 
-## Run Locally
+1. **Upload** the `index.html` file to your GitHub repository.
+2. Go to your repository **Settings**.
+3. Navigate to the **Pages** section on the left sidebar.
+4. Under **Build and deployment**, select `Deploy from a branch`.
+5. Under **Branch**, select `main` (or `master`) and `/ (root)` folder.
+6. Click **Save**. 
 
-**Prerequisites:**  Node.js
+Within a few minutes, your portfolio will be live at `https://<your-username>.github.io/<repository-name>/`.
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Contact
+- **Email:** tanushtalwar8@gmail.com
+- **Phone / WhatsApp:** +91 9318399511

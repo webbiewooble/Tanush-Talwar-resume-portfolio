@@ -1,17 +1,17 @@
 # Tanush Talwar - Developer Portfolio
 
-A premium, modern developer portfolio designed and built as a **single-file static website** (HTML, CSS, JavaScript). Optimized for high-performance and zero-config deployment.
+A premium, modern developer portfolio built with standard HTML, CSS, and JavaScript. Organized into logical, structured parts for easy maintenance and zero-config deployment.
 
 ## Features
-- **Single File Architecture:** Everything is contained within `index.html` (no external CSS/JS files).
-- **No Build Tools Required:** No npm, Webpack, or Vite needed.
+- **Clean Structure:** Separated `index.html`, `style.css`, and `script.js` for modularity.
+- **No Build Tools Required:** No npm, Webpack, or Vite needed—just pure frontend files.
 - **Modern UI/UX:** Glassmorphism, smooth scroll, typing effects, and custom cursors.
 - **Performance Optimized:** Lightweight and blazing fast.
 
 ## Hosting on GitHub Pages
 This project is perfectly formatted to be hosted directly on GitHub Pages out-of-the-box.
 
-1. **Upload** the `index.html` file to your GitHub repository.
+1. **Upload** all files (`index.html`, `style.css`, `script.js`) to your GitHub repository.
 2. Go to your repository **Settings**.
 3. Navigate to the **Pages** section on the left sidebar.
 4. Under **Build and deployment**, select `Deploy from a branch`.
